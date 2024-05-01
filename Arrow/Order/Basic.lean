@@ -208,10 +208,10 @@ namespace QPreorder
   theorem le_refl {a : α} : a ≤ a :=
     self.refl _
 
-  instance instWellFounded [Finite α] : WellFoundedLT α :=
-    ⟨Finite.wellFounded_of_trans_of_irrefl self.lt⟩
+  instance instWellFounded [F : Fintype α] : IsWellFounded α self.lt :=
+    ⟨F.finite.wellFounded_of_trans_of_irrefl self.lt⟩
 
-  def wellFounded [Finite α] := self.instWellFounded
+  def wellFounded [Fintype α] := self.instWellFounded
 end QPreorder
 
 
@@ -226,10 +226,10 @@ namespace QOrder
   theorem le_total {a b : α} : a ≤ b ∨ b ≤ a :=
     self.total a b
 
-  instance instWellFounded [Finite α] : WellFoundedLT α :=
-    ⟨Finite.wellFounded_of_trans_of_irrefl self.lt⟩
+  instance instWellFounded [F : Fintype α] : WellFoundedLT α :=
+    ⟨F.finite.wellFounded_of_trans_of_irrefl self.lt⟩
 
-  def wellFounded [Finite α] := self.instWellFounded
+  def wellFounded [Fintype α] := self.instWellFounded
 end QOrder
 
 
@@ -260,6 +260,11 @@ namespace Protorder
   def ofPreorder := @instSelfOfPreorder
 
 end Protorder
+
+
+
+def _root_.Preorder.toProtorder [Preorder α] : Protorder α :=
+  Protorder.ofPreorder
 
 
 

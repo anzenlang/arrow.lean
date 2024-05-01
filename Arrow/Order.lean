@@ -1,2 +1,2 @@
 import Arrow.Order.Basic
-import Arrow.Order.Extra
+import Arrow.Order.MaxBest

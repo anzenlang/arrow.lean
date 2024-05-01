@@ -6,6 +6,12 @@ import Mathlib
 
 
 
+/-! ## `Finset` -/
+
+namespace Finset
+  variable (self : Finset α)
+end Finset
+
 /-! ## `Fintype` -/
 
 namespace Fintype
@@ -16,6 +22,12 @@ namespace Fintype
     let absurd :=
       h_empty ▸ self.complete default
     contradiction
+
+  theorem toList_elems_nempty [Inhabited α] : self.elems.toList ≠ [] := by
+    intro toList_empty
+    let elems_empty :=
+      Finset.toList_eq_nil.mp toList_empty
+    exact elems_nempty elems_empty
 end Fintype
 
 
